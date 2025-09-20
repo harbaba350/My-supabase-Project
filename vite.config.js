@@ -1,12 +1,15 @@
-// import this after install `@mdi/font` package
-import '@mdi/font/css/materialdesignicons.css'
+// vite.config.js
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-
-export default defineNuxtPlugin((app) => {
-  const vuetify = createVuetify({
-    // ... your configuration
-  })
-  app.vueApp.use(vuetify)
-})
+export default defineConfig({
+  plugins: [vue()],
+  optimizeDeps: {
+    include: ['vuetify', '@supabase/supabase-js']
+  },
+  resolve: {
+    alias: {
+      '@': new URL('./src', import.meta.url).pathname
+    }
+  }
+});
